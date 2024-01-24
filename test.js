@@ -221,37 +221,45 @@ function resolveAfter1Second() {
 // sequentialWait();
 
 // concurrent
-async function concurrent1() {
-  console.log('== concurrent1 starts ==');
+// async function concurrent1() {
+//   console.log('== concurrent1 starts ==');
 
-  const results = await Promise.all([
-    resolveAfter2Seconds(),
-    resolveAfter1Second(),
-  ]);
+//   const results = await Promise.all([
+//     resolveAfter2Seconds(),
+//     resolveAfter1Second(),
+//   ]);
 
-  console.log(results[0]); // slow
-  console.log(results[1]); // fast
+//   console.log(results[0]); // slow
+//   console.log(results[1]); // fast
 
-  console.log('== concurrent1 ends ==');
+//   console.log('== concurrent1 ends ==');
+// }
+
+// // concurrent1();
+
+// async function concurrent2() {
+//   console.log('== concurrent2 ==');
+
+//   await Promise.all([
+//     (async () => {
+//       const result = await resolveAfter2Seconds();
+//       console.log(result);
+//     })(),
+//     (async () => {
+//       const result = await resolveAfter1Second();
+//       console.log(result);
+//     })(),
+//   ]);
+
+//   console.log('== concurrent2 ends ==');
+// }
+
+// concurrent2();
+
+const paramsString = 'year=2021&month=february&day=monday';
+const searchParams = new URLSearchParams(paramsString);
+
+// iterating the search parameters
+for (const p of searchParams) {
+  console.log(p);
 }
-
-// concurrent1();
-
-async function concurrent2() {
-  console.log('== concurrent2 ==');
-
-  await Promise.all([
-    (async () => {
-      const result = await resolveAfter2Seconds();
-      console.log(result);
-    })(),
-    (async () => {
-      const result = await resolveAfter1Second();
-      console.log(result);
-    })(),
-  ]);
-
-  console.log('== concurrent2 ends ==');
-}
-
-concurrent2();
